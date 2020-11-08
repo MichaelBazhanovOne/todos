@@ -1,7 +1,14 @@
 <template>
 	<div class="todo">
-		<todo-input @addTodo='addTodo'/>
-		<todo-list />
+		<todo-input
+		@addTodo='addTodo'
+		/>
+
+		<todo-list
+		:todos='todos'
+		v-if="todos.length > 0"
+		@removeTodo="removeTodo"
+		/>
 		<pre>{{todos}}</pre>
 	</div>
 </template>
@@ -23,6 +30,12 @@ export default {
 	methods: {
 		addTodo(todo) {
 			this.todos.push(todo)
+		},
+		removeTodo(todoId) {
+			console.log(todoId)
+			this.todos = this.todos.filter(item => {
+				return item.id != todoId
+			})
 		}
 	}
 
