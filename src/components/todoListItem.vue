@@ -1,8 +1,11 @@
 <template>
-	<div class="todo-item">
+	<div :class="['todo-item', {checked:todo.checked}]">
 		<label class="label">
 			<div class="input-block">
-				<input class="input" type="checkbox">
+				<input
+				@change="checkTodo"
+				:checked="todo.checked"
+				class="input" type="checkbox">
 			</div>
 			<div class="title">{{todo.name}}</div>
 		</label>
@@ -22,6 +25,14 @@ export default {
 	methods: {
 		removeTodo() {
 			this.$emit('removeTodo', this.todo.id)
+		},
+		checkTodo(e) {
+			// this.$emit('checkTodo', this.todo.checked = e.target.checked) //измение по ссылке
+			const todoItem = {
+				...this.todo,
+				checked:  e.target.checked
+			}
+			this.$emit('checkTodo', todoItem)
 		}
 	}
 
@@ -70,6 +81,11 @@ export default {
 		.remove {
 			visibility: visible;
 		}
+	}
+}
+.checked {
+	.title {
+		text-decoration: line-through;
 	}
 }
 </style>

@@ -5,7 +5,11 @@
 			<ul class="list">
 				<li class="item" v-for="(todo,index) in todos" :key="index">
 
-					<todo-list-item :todo="todo" @removeTodo="removeTodo"/>
+					<todo-list-item
+						:todo="todo"
+						@removeTodo="removeTodo"
+						@checkTodo="checkTodo"
+					/>
 
 				</li>
 
@@ -41,6 +45,9 @@ export default {
 	methods: {
 		removeTodo(todoId) {
 			this.$emit('removeTodo', todoId)
+		},
+		checkTodo(todo) {
+			this.$emit('checkTodo', todo)
 		}
 	}
 

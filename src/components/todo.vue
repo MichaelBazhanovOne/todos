@@ -8,6 +8,7 @@
 		:todos='todos'
 		v-if="todos.length > 0"
 		@removeTodo="removeTodo"
+		@checkTodo="checkTodo"
 		/>
 		<pre>{{todos}}</pre>
 	</div>
@@ -32,10 +33,16 @@ export default {
 			this.todos.push(todo)
 		},
 		removeTodo(todoId) {
-			console.log(todoId)
 			this.todos = this.todos.filter(item => {
 				return item.id != todoId
 			})
+		},
+		checkTodo(todo) {
+			// console.log(todo)
+			// this.todos.forEach(item => {
+			// 	if (item.id == todo.id) { item = todo}
+			// }) //изменнеи по ссылке
+			this.todos = this.todos.map(item => item.id == todo.id ? todo : item)
 		}
 	}
 
