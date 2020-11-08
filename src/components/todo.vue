@@ -1,7 +1,8 @@
 <template>
 	<div class="todo">
-		<todo-input />
+		<todo-input @addTodo='addTodo'/>
 		<todo-list />
+		<pre>{{todos}}</pre>
 	</div>
 </template>
 
@@ -13,6 +14,16 @@ export default {
 	components: {
 		todoInput,
 		todoList,
+	},
+	data() {
+		return {
+			todos: []
+		}
+	},
+	methods: {
+		addTodo(todo) {
+			this.todos.push(todo)
+		}
 	}
 
 }
