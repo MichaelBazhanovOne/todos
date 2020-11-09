@@ -2,15 +2,19 @@
 	<div class="todo">
 		<todo-input
 		@addTodo='addTodo'
+		@arrowTodo='arrowTodo'
 		/>
 
 		<todo-list
-		:todos='todos'
+		:todos='filtredTodos'
 		v-if="todos.length > 0"
 		@removeTodo="removeTodo"
 		@checkTodo="checkTodo"
+		@filterTodos="filterTodos"
+		@clearTodos="clearTodos"
 		/>
 		<pre>{{todos}}</pre>
+		<pre>{{filtredTodos}}</pre>
 	</div>
 </template>
 
@@ -25,7 +29,20 @@ export default {
 	},
 	data() {
 		return {
-			todos: []
+			todos: [],
+			filter: 'all'
+		}
+	},
+	computed: {
+		filtredTodos() { //этот метод возвращает отфильтрованный this.todos
+			switch (this.filter) {
+				case 'all' :
+					return this.todos
+				case 'active' :
+					return this.todos.filter(item => item.checked == false)
+				case 'completed' :
+					return this.todos.filter(item => item.checked == true)
+			}
 		}
 	},
 	methods: {
@@ -43,9 +60,21 @@ export default {
 			// 	if (item.id == todo.id) { item = todo}
 			// }) //изменнеи по ссылке
 			this.todos = this.todos.map(item => item.id == todo.id ? todo : item)
+		},
+		filterTodos(filter) {
+			this.filter = filter
+		},
+		arrowTodo(select) {
+			if (select) {
+				this.filtredTodos.filter(item => item.checked = true)
+			} else {
+				this.filtredTodos.filter(item => item.checked = false)
+			}
+		},
+		clearTodos(e) {
+			console.log(e)
 		}
-	}
-
+	},
 }
 </script>
 

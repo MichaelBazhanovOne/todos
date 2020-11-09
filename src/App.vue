@@ -1,4 +1,5 @@
 <template>
+  <!-- http://todomvc.com/examples/vue/#/all -->
   <div class="container">
     <todo />
   </div>

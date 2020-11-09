@@ -1,14 +1,31 @@
 <template>
 	<div>
-		<button type="button">all</button>
+		<!-- <button type="button">all</button>
 		<button class="active" type="button">active</button>
-		<button type="button">completed</button>
+		<button type="button">completed</button> -->
+		<button
+		v-for="filter in filters" :key="filter"
+		@click="filterTodos(filter)"
+		:class="[{active: currentFilter === filter}]"
+		type="button"
+		>{{filter}}</button>
 	</div>
 </template>
 
 <script>
 export default {
-
+	data() {
+		return {
+			filters: ['all','active','completed'],
+			currentFilter: 'all',
+		}
+	},
+	methods: {
+		filterTodos(filter) {
+			this.currentFilter = filter
+			this.$emit('filterTodos', filter)
+		}
+	}
 }
 </script>
 

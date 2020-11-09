@@ -19,10 +19,18 @@
 		<div class="footer">
 			<div class="footer-content">
 
-				<div class="counter">{{todos.length}} осталось заданий</div>
+				<div class="counter">{{todos.length}} items left</div>
 
 				<div class="filter">
-					<todo-list-filter />
+					<todo-list-filter
+					@filterTodos="filterTodos"
+					/>
+				</div>
+
+				<div class="clear">
+					<button
+					@click="clearTodos"
+					type="button">Clear completed</button>
 				</div>
 
 			</div>
@@ -48,6 +56,12 @@ export default {
 		},
 		checkTodo(todo) {
 			this.$emit('checkTodo', todo)
+		},
+		filterTodos(filter) {
+			this.$emit('filterTodos', filter)
+		},
+		clearTodos() {
+			this.$emit('clearTodos')
 		}
 	}
 
@@ -91,5 +105,22 @@ export default {
 }
 .filter {
     flex: 1;
+}
+.clear button {
+	margin-right: 20px;
+	border: none;
+	background: transparent;
+	font-weight: 300;
+	color: inherit;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	outline: none;
+	transition: background-color ease 0.4s, color ease 0.4s;
+
+	&:hover {
+		background-color: #f6f6f6;
+		color: black;
+	}
 }
 </style>
