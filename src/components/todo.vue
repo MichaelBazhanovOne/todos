@@ -8,7 +8,7 @@
 		<todo-list
 		v-if="todos.length > 0"
 		:todos='filtredTodos'
-		:counterTodos='counterTodos()'
+		:counterTodos='counterTodos'
 		@removeTodo="removeTodo"
 		@checkTodo="checkTodo"
 		@filterTodos="filterTodos"
@@ -44,7 +44,10 @@ export default {
 				case 'completed' :
 					return this.todos.filter(item => item.checked == true)
 			}
-		}
+		},
+		counterTodos() {
+			return this.todos.filter(item => item.checked != true).length
+		},
 	},
 	methods: {
 		addTodo(todo) {
@@ -72,11 +75,8 @@ export default {
 				this.filtredTodos.filter(item => item.checked = false)
 			}
 		},
-		counterTodos() {
-			return this.todos.filter(item => item.checked != true).length
-		},
-		clearTodos(e) {
-			console.log(e)
+		clearTodos() {
+			this.todos = this.todos.filter(item => item.checked == false)
 		}
 	},
 }
