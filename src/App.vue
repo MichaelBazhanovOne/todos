@@ -1,7 +1,10 @@
 <template>
   <!-- http://todomvc.com/examples/vue/#/all -->
   <div class="container">
+    <h1 class="root-todo">TODO</h1>
     <todo />
+    <h2 class="todo-subtitle-1">Creator and Designer</h2>
+    <h3 class="todo-subtitle-2">Бажанов Михаил</h3>
   </div>
 </template>
 
@@ -22,12 +25,16 @@ export default {
 
 <style lang="scss">
 body {
+    margin: 0;
+    padding: 0;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.42;
     -webkit-font-smoothing: antialiased;
     font-weight: 300;
-    background: #f5f5f5;
+    background: linear-gradient(#f5f5f5, #2d7ca247);
+    min-height: 100vh;
+    color: #607d8b;
 }
 
 .container {
@@ -46,6 +53,22 @@ ul {
 
 * {
     box-sizing: border-box;
+}
+.root-todo {
+  text-align: center;
+  font-size: 70px;
+  opacity: 0.5;
+  color: #607d8b;
+  padding: 0;
+  margin: 40px 0;
+}
+.todo-subtitle-1 {
+  text-align: center;
+  margin: 0;
+  margin-top: 70px;
+}
+.todo-subtitle-2 {
+  text-align: center;
 }
 </style>
 

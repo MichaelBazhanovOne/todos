@@ -1,8 +1,5 @@
 <template>
 	<div>
-		<!-- <button type="button">all</button>
-		<button class="active" type="button">active</button>
-		<button type="button">completed</button> -->
 		<button
 		v-for="filter in filters" :key="filter"
 		@click="filterTodos(filter)"

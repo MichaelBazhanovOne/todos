@@ -1,6 +1,7 @@
 <template>
 	<div class="todo">
 		<todo-input
+		:todos='todos'
 		@addTodo='addTodo'
 		@arrowTodo='arrowTodo'
 		/>
@@ -15,8 +16,8 @@
 		@filterTodos="filterTodos"
 		@clearTodos="clearTodos"
 		/>
-		<pre>{{todos}}</pre>
-		<pre>{{filtredTodos}}</pre>
+		<!-- <pre>{{todos}}</pre> -->
+		<!-- <pre>{{filtredTodos}}</pre> -->
 	</div>
 </template>
 
@@ -88,7 +89,6 @@ export default {
 
 <style lang="scss" scoped>
 	.todo {
-		margin-top: 100px;
 		background: #fff;
 		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 	}
