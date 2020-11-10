@@ -19,7 +19,7 @@
 		<div class="footer">
 			<div class="footer-content">
 
-				<div class="counter">{{todos.length}} items left</div>
+				<div class="counter">{{counterTodos}} items left</div>
 
 				<div class="filter">
 					<todo-list-filter
@@ -45,10 +45,16 @@ import todoListItem from "./todoListItem";
 export default {
 	props: {
 		todos: Array,
+		counterTodos: Number,
 	},
 	components: {
 		todoListFilter,
 		todoListItem,
+	},
+	data() {
+		return {
+			// counter: 0
+		}
 	},
 	methods: {
 		removeTodo(todoId) {

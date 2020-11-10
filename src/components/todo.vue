@@ -6,8 +6,9 @@
 		/>
 
 		<todo-list
-		:todos='filtredTodos'
 		v-if="todos.length > 0"
+		:todos='filtredTodos'
+		:counterTodos='counterTodos()'
 		@removeTodo="removeTodo"
 		@checkTodo="checkTodo"
 		@filterTodos="filterTodos"
@@ -70,6 +71,9 @@ export default {
 			} else {
 				this.filtredTodos.filter(item => item.checked = false)
 			}
+		},
+		counterTodos() {
+			return this.todos.filter(item => item.checked != true).length
 		},
 		clearTodos(e) {
 			console.log(e)

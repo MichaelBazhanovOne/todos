@@ -82,10 +82,15 @@ export default {
 			visibility: visible;
 		}
 	}
+	.title {
+		transition: opacity ease .4s;
+	}
+
 }
 .checked {
 	.title {
 		text-decoration: line-through;
+		opacity: 0.2;
 	}
 }
 </style>
