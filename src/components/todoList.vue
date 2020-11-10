@@ -27,7 +27,7 @@
 					/>
 				</div>
 
-				<div class="clear">
+				<div :class="['clear', {show:buttonClearTodos}]">
 					<button
 					@click="clearTodos"
 					type="button">Clear completed</button>
@@ -46,15 +46,11 @@ export default {
 	props: {
 		todos: Array,
 		counterTodos: Number,
+		buttonClearTodos: Boolean,
 	},
 	components: {
 		todoListFilter,
 		todoListItem,
-	},
-	data() {
-		return {
-			// counter: 0
-		}
 	},
 	methods: {
 		removeTodo(todoId) {
@@ -112,21 +108,29 @@ export default {
 .filter {
     flex: 1;
 }
-.clear button {
-	margin-right: 20px;
-	border: none;
-	background: transparent;
-	font-weight: 300;
-	color: inherit;
-	cursor: pointer;
-	border: 1px solid transparent;
-	border-radius: 3px;
-	outline: none;
-	transition: background-color ease 0.4s, color ease 0.4s;
+.clear {
+	visibility: hidden;
 
-	&:hover {
-		background-color: #f6f6f6;
-		color: black;
+	&.show {
+		visibility: visible;
+	}
+	button {
+		border: none;
+		background: transparent;
+		font-weight: 300;
+		color: inherit;
+		cursor: pointer;
+		border: 1px solid transparent;
+		border-radius: 3px;
+		outline: none;
+		transition: background-color ease 0.4s, color ease 0.4s;
+
+		&:hover {
+			background-color: #f6f6f6;
+			color: black;
+		}
 	}
 }
+
+
 </style>

@@ -9,6 +9,7 @@
 		v-if="todos.length > 0"
 		:todos='filtredTodos'
 		:counterTodos='counterTodos'
+		:buttonClearTodos='buttonClearTodos'
 		@removeTodo="removeTodo"
 		@checkTodo="checkTodo"
 		@filterTodos="filterTodos"
@@ -47,6 +48,9 @@ export default {
 		},
 		counterTodos() {
 			return this.todos.filter(item => item.checked != true).length
+		},
+		buttonClearTodos() {
+			return this.todos.some(item => item.checked)
 		},
 	},
 	methods: {
