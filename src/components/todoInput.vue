@@ -1,5 +1,7 @@
 <template>
-	<div class="todo-input">
+	<div
+		:class="['todo-input', {'valid-error': validation.hasError('todo.name')}]">
+		<div class="error">{{ validation.firstError('todo.name') }}</div>
 		<div
 		v-if="todos.length"
 		@click="arrowTodo"
@@ -14,8 +16,16 @@
 </template>
 
 <script>
+import { Validator } from 'simple-vue-validator'
+
 let uniqId = 1;
 export default {
+	mixins: [require('simple-vue-validator').mixin],
+	validators: {
+		'todo.name'(value) {
+			return Validator.value(value).required('Поле не должно быть пустым!')
+		}
+	},
 	props: {
 		todos: Array
 	},
@@ -31,9 +41,18 @@ export default {
 	},
 	methods: {
 		addTodo(e) {
-			this.todo.id = uniqId++;
-			this.$emit('addTodo', {...this.todo})
-			this.todo.name =''
+			this.$validate().then(succes => {
+				//неудачная валидация
+				if(!succes) return
+
+				//удачная валидация
+				this.todo.id = uniqId++;
+				this.$emit('addTodo', {...this.todo})
+				this.todo.name =''
+				this.validation.reset()
+
+			})
+
 		},
 		arrowTodo() {
 			this.select == false ? this.select = true : this.select = false
@@ -48,6 +67,7 @@ export default {
 .todo-input {
 	position: relative;
 	color: #607d8b;
+	border: 2px solid transparent;
 }
 .input {
 	font-size: 24px;
@@ -83,13 +103,13 @@ export default {
 	position: relative;
 }
 .error {
-	color: red;
+	color: #F44336;
 	position: absolute;
 	bottom: 100%;
 	left: 0;
 	font-style: italic;
 }
 .valid-error {
-	border: 1px solid red;;
+	border: 2px solid #F44336;
 }
 </style>
