@@ -15,7 +15,7 @@ const routes = [
 		component: todo
 	},
 	{
-		path: '/view', //по какому url какой компонент отобразить
+		path: '/view/:todo', //по какому url какой компонент отобразить с параметром
 		component: todoView
 	}
 ];

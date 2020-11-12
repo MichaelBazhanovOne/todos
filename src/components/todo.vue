@@ -16,8 +16,8 @@
 		@filterTodos="filterTodos"
 		@clearTodos="clearTodos"
 		/>
-		<!-- <pre>{{todos}}</pre> -->
-		<!-- <pre>{{filtredTodos}}</pre> -->
+		<pre>{{todos}}</pre>
+		<pre>{{filtredTodos}}</pre>
 	</div>
 </template>
 
