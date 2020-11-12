@@ -2,7 +2,9 @@
   <!-- http://todomvc.com/examples/vue/#/all -->
   <div class="container">
     <h1 class="root-todo">TODO</h1>
-    <todo />
+
+    <router-view></router-view>
+
     <h2 class="todo-subtitle-1">Creator and Designer</h2>
     <h3 class="todo-subtitle-2">Бажанов Михаил</h3>
   </div>
