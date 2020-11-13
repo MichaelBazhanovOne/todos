@@ -1,7 +1,7 @@
 <template>
   <!-- http://todomvc.com/examples/vue/#/all -->
   <div class="container">
-    <h1 class="root-todo">TODO</h1>
+    <h1 class="root-todo">TODOS</h1>
 
     <router-view></router-view>
 
