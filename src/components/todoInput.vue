@@ -10,13 +10,14 @@
 		</div>
 		<input
 		v-model="todo.name"
-		@keydown.enter="addTodo"
+		@keydown.enter="addNewTodo"
 		class="input" type="text" placeholder="Todo Name" autofocus>
 	</div>
 </template>
 
 <script>
 import { Validator } from 'simple-vue-validator'
+import { mapMutations } from 'vuex'
 
 let uniqId = 1;
 export default {
@@ -40,14 +41,15 @@ export default {
 		}
 	},
 	methods: {
-		addTodo(e) {
+		...mapMutations(['addTodo']),
+		addNewTodo(e) {
 			this.$validate().then(succes => {
 				//неудачная валидация
 				if(!succes) return
 
 				//удачная валидация
 				this.todo.id = uniqId++;
-				this.$emit('addTodo', {...this.todo})
+				this.addTodo({...this.todo})
 				this.todo.name =''
 				this.validation.reset()
 
