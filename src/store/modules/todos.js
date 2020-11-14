@@ -3,8 +3,21 @@ const todos = {
 		todos: [],
 		filter: 'all'
 	},
-	actions: {},
-	getters: {},
+	actions: {
+		fetchItem(state) {
+			console.log(state)
+			state.commit('testMutations', 'Михаил')
+			state.dispatch('testActions', 'Бажанов')
+		},
+		testActions(state) {
+			console.log('testActions - из actions вызвать actions')
+		}
+	},
+	getters: {
+		todoById: state => id => {
+			return state.todos.filter( item => item.id == id )
+		}
+	},
 	mutations: {
 		addTodo(state, todo) {
 			state.todos.push(todo)
@@ -20,6 +33,9 @@ const todos = {
 		filterTodos(state, filter) {
 			state.filter = filter
 		},
+		testMutations(state, test) {
+			console.log('testMutations', test)
+		}
 	},
 }
 

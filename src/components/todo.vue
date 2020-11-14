@@ -20,7 +20,7 @@
 <script>
 import todoInput from "./todoInput";
 import todoList from "./todoList";
-import { mapState } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
 	components: {
@@ -33,11 +33,20 @@ export default {
 			// filter: 'all'
 		}
 	},
+	mounted() {//getters для тестирования и примера!
+		// setTimeout(() => {
+		// 	console.log(this.todoById(3))
+		// }, 6000)
+
+		this.fetchItem()
+	},
 	computed: {
 		...mapState({//vuex
 			todos: state => state.todos.todos,
 			filter: state => state.todos.filter,
 		}),
+		// ...mapGetters(['todoById']),//getters для тестирования и примера!
+
 		filtredTodos() { //этот метод возвращает отфильтрованный this.todos
 			switch (this.filter) {
 				case 'all' :
@@ -56,6 +65,8 @@ export default {
 		},
 	},
 	methods: {
+		...mapActions(['fetchItem']),
+
 		arrowTodo(select) {
 			if (select) {
 				this.filtredTodos.filter(item => item.checked = true)
