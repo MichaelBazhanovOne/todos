@@ -10,9 +10,6 @@
 		:todos='filtredTodos'
 		:counterTodos='counterTodos'
 		:buttonClearTodos='buttonClearTodos'
-		@removeTodo="removeTodo"
-		@checkTodo="checkTodo"
-		@filterTodos="filterTodos"
 		@clearTodos="clearTodos"
 		/>
 		<pre>{{todos}}</pre>
@@ -37,8 +34,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState({
-			// todos: state => state
+		...mapState({//vuex
 			todos: state => state.todos.todos,
 			filter: state => state.todos.filter,
 		}),
@@ -60,22 +56,6 @@ export default {
 		},
 	},
 	methods: {
-
-		removeTodo(todoId) {
-			this.todos = this.todos.filter(item => {
-				return item.id != todoId
-			})
-		},
-		checkTodo(todo) {
-			// console.log(todo)
-			// this.todos.forEach(item => {
-			// 	if (item.id == todo.id) { item = todo}
-			// }) //изменнеи по ссылке
-			this.todos = this.todos.map(item => item.id == todo.id ? todo : item)
-		},
-		filterTodos(filter) {
-			this.filter = filter
-		},
 		arrowTodo(select) {
 			if (select) {
 				this.filtredTodos.filter(item => item.checked = true)

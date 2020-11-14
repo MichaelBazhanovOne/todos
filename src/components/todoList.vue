@@ -7,8 +7,6 @@
 
 					<todo-list-item
 						:todo="todo"
-						@removeTodo="removeTodo"
-						@checkTodo="checkTodo"
 					/>
 
 				</li>
@@ -22,15 +20,14 @@
 				<div class="counter">{{counterTodos}} items left</div>
 
 				<div class="filter">
-					<todo-list-filter
-					@filterTodos="filterTodos"
-					/>
+					<todo-list-filter />
 				</div>
 
 				<div :class="['clear', {show:buttonClearTodos}]">
 					<button
-					@click="clearTodos"
-					type="button">Clear completed</button>
+						@click="clearTodos"
+						type="button">Clear completed
+					</button>
 				</div>
 
 			</div>
@@ -53,15 +50,6 @@ export default {
 		todoListItem,
 	},
 	methods: {
-		removeTodo(todoId) {
-			this.$emit('removeTodo', todoId)
-		},
-		checkTodo(todo) {
-			this.$emit('checkTodo', todo)
-		},
-		filterTodos(filter) {
-			this.$emit('filterTodos', filter)
-		},
 		clearTodos() {
 			this.$emit('clearTodos')
 		}

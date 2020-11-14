@@ -2,7 +2,7 @@
 	<div>
 		<button
 		v-for="filter in filters" :key="filter"
-		@click="filterTodos(filter)"
+		@click="filterCurentTodos(filter)"
 		:class="[{active: currentFilter === filter}]"
 		type="button"
 		>{{filter}}</button>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
 	data() {
 		return {
@@ -18,9 +20,12 @@ export default {
 		}
 	},
 	methods: {
-		filterTodos(filter) {
+		...mapMutations(['filterTodos']),
+
+		filterCurentTodos(filter) {
 			this.currentFilter = filter
-			this.$emit('filterTodos', filter)
+			// this.$emit('filterTodos', filter)
+			this.filterTodos(filter) //vuex
 		}
 	}
 }

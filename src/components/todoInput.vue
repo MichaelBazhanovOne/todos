@@ -49,19 +49,16 @@ export default {
 
 				//удачная валидация
 				this.todo.id = uniqId++;
-				this.addTodo({...this.todo})
+				this.addTodo({...this.todo});//vuex
 				this.todo.name =''
 				this.validation.reset()
-
 			})
-
 		},
 		arrowTodo() {
 			this.select == false ? this.select = true : this.select = false
 			this.$emit('arrowTodo', this.select)
 		}
 	}
-
 }
 </script>
 
