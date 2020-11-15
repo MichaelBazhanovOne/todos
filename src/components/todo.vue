@@ -42,6 +42,7 @@ export default {
 		...mapState({//vuex
 			todos: state => state.todos.todos,
 			filter: state => state.todos.filter,
+			select: state => state.todos.select,
 		}),
 		// ...mapGetters(['todoById']),//getters для тестирования и примера!
 		...mapGetters(['filtredTodos', 'counterTodos', 'buttonClearTodos']),

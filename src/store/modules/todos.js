@@ -1,7 +1,8 @@
 const todos = {
 	state: {
 		todos: [],
-		filter: 'all'
+		filter: 'all',
+		select: false
 	},
 	actions: {
 		// fetchItem(state) {
@@ -49,8 +50,11 @@ const todos = {
 		filterTodos(state, filter) {
 			state.filter = filter
 		},
-		testMutations(state, test) {
-			console.log('testMutations', test)
+		// testMutations(state, test) {
+		// 	console.log('testMutations', test)
+		// }
+		arrowTodoSelect_V(state, select) {
+			state.select = select
 		}
 	},
 }
