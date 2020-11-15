@@ -16,7 +16,23 @@ const todos = {
 	getters: {
 		// todoById: state => id => {
 		// 	return state.todos.filter( item => item.id == id )
-		// }
+		// },
+		filtredTodos: (state) => { //этот метод возвращает отфильтрованный this.todos
+			switch (state.filter) {
+				case 'all' :
+					return state.todos
+				case 'active' :
+					return state.todos.filter(item => item.checked == false)
+				case 'completed' :
+					return state.todos.filter(item => item.checked == true)
+			}
+		},
+		counterTodos: (state) => {
+			return state.todos.filter(item => item.checked != true).length
+		},
+		buttonClearTodos: (state) => {
+			return state.todos.some(item => item.checked)
+		},
 	},
 	mutations: {
 		addTodo(state, todo) {

@@ -29,8 +29,6 @@ export default {
 	},
 	data() {
 		return {
-			// todos: [],
-			// filter: 'all'
 		}
 	},
 	mounted() {//getters для тестирования и примера!
@@ -46,23 +44,9 @@ export default {
 			filter: state => state.todos.filter,
 		}),
 		// ...mapGetters(['todoById']),//getters для тестирования и примера!
+		...mapGetters(['filtredTodos', 'counterTodos', 'buttonClearTodos']),
 
-		filtredTodos() { //этот метод возвращает отфильтрованный this.todos
-			switch (this.filter) {
-				case 'all' :
-					return this.todos
-				case 'active' :
-					return this.todos.filter(item => item.checked == false)
-				case 'completed' :
-					return this.todos.filter(item => item.checked == true)
-			}
-		},
-		counterTodos() {
-			return this.todos.filter(item => item.checked != true).length
-		},
-		buttonClearTodos() {
-			return this.todos.some(item => item.checked)
-		},
+
 	},
 	methods: {
 		// ...mapActions(['fetchItem']),
