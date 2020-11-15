@@ -38,7 +38,7 @@ export default {
 		// 	console.log(this.todoById(3))
 		// }, 6000)
 
-		this.fetchItem()
+		// this.fetchItem()
 	},
 	computed: {
 		...mapState({//vuex
