@@ -65,7 +65,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapActions(['fetchItem']),
+		// ...mapActions(['fetchItem']),
 
 		arrowTodo(select) {
 			if (select) {

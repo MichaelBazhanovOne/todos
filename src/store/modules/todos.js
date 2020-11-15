@@ -4,19 +4,19 @@ const todos = {
 		filter: 'all'
 	},
 	actions: {
-		fetchItem(state) {
-			console.log(state)
-			state.commit('testMutations', 'Михаил')
-			state.dispatch('testActions', 'Бажанов')
-		},
-		testActions(state) {
-			console.log('testActions - из actions вызвать actions')
-		}
+		// fetchItem(state) {
+		// 	console.log(state)
+		// 	state.commit('testMutations', 'Михаил')
+		// 	state.dispatch('testActions', 'Бажанов')
+		// },
+		// testActions(state) {
+		// 	console.log('testActions - из actions вызвать actions')
+		// }
 	},
 	getters: {
-		todoById: state => id => {
-			return state.todos.filter( item => item.id == id )
-		}
+		// todoById: state => id => {
+		// 	return state.todos.filter( item => item.id == id )
+		// }
 	},
 	mutations: {
 		addTodo(state, todo) {
