@@ -47,8 +47,7 @@ export default {
 		...mapGetters(['select']),
 	},
 	methods: {
-		...mapMutations(['addTodo', 'arrowTodoFilter_V',
-		'arrowTodoSelectToggle_V']),
+		...mapMutations(['addTodo', 'arrowTodoFilter_V', 'arrowTodoSelectToggle_V']),
 		addNewTodo(e) {
 			this.$validate().then(succes => {
 				//неудачная валидация
@@ -80,12 +79,13 @@ export default {
 	position: relative;
 	color: #607d8b;
 	border: 2px solid transparent;
+	background-color: #fff;
 }
 .input {
 	font-size: 24px;
 	padding: 16px 16px 16px 60px;
 	border: 1px solid transparent;
-	box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.03);
 	line-height: 1.4em;
 	outline: none;
 	color: inherit;
@@ -102,7 +102,7 @@ export default {
 	position: absolute;
 	top: 50%;
 	left: 0;
-	transform: translate(25px, -50%);
+	transform: translate(19px, -50%);
 	width: 20px;
 	height: 20px;
 	opacity: 0.2;
@@ -115,13 +115,13 @@ export default {
 	position: relative;
 }
 .error {
-	color: #F44336;
+	color: #607d8b;
 	position: absolute;
 	bottom: 100%;
 	left: 0;
 	font-style: italic;
 }
 .valid-error {
-	border: 2px solid #F44336;
+	border: 2px solid #607d8b;
 }
 </style>

@@ -57,7 +57,6 @@ export default {
 		clearTodos() {
 			// this.$emit('clearTodos')
 			this.removeTodoChecked_V() //vuex
-
 		}
 	}
 
@@ -66,6 +65,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.content {
+	position: relative;
+	z-index: 1;
+}
 .list {
     font-size: 24px;
     border-bottom: 1px solid #ededed;
@@ -78,6 +81,7 @@ export default {
 }
 .footer {
     color: #777;
+	background-color: #fff;
     padding: 10px 15px;
     text-align: center;
     position: relative;
@@ -108,6 +112,7 @@ export default {
 	&.show {
 		visibility: visible;
 	}
+
 	button {
 		border: none;
 		background: transparent;

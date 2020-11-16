@@ -11,8 +11,8 @@
 		:counterTodos='counterTodos'
 		:buttonClearTodos='buttonClearTodos'
 		/>
-		<pre>{{todos}}</pre>
-		<pre>{{filtredTodos}}</pre>
+		<!-- <pre>{{todos}}</pre> -->
+		<!-- <pre>{{filtredTodos}}</pre> -->
 	</div>
 </template>
 
@@ -52,24 +52,13 @@ export default {
 	},
 	methods: {
 		// ...mapActions(['fetchItem']),
-
-		// arrowTodo(select) {
-		// 	if (select) {
-		// 		this.filtredTodos.filter(item => item.checked = true)
-		// 	} else {
-		// 		this.filtredTodos.filter(item => item.checked = false)
-		// 	}
-		// },
-		// clearTodos() {
-		// 	this.todos = this.todos.filter(item => item.checked == false)
-		// }
 	},
 }
 </script>
 
 <style lang="scss" scoped>
 	.todo {
-		background: #fff;
+		// background: #fff;
 		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 	}
 </style>

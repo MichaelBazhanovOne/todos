@@ -43,8 +43,17 @@ export default {
 		border-radius: 3px;
 		outline: none;
 
+		transition: background-color ease 0.4s, color ease 0.4s;
+
+		&:hover {
+			background-color: #f6f6f6;
+			color: black;
+		}
+
 		&.active {
-			border-color: rgba(175, 47, 47, 0.2);
+			border-color: black;
+			color: black;
+			background-color: #fff;
 		}
 
 		&:last-child {
