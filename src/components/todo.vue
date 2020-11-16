@@ -10,7 +10,6 @@
 		:todos='filtredTodos'
 		:counterTodos='counterTodos'
 		:buttonClearTodos='buttonClearTodos'
-		@clearTodos="clearTodos"
 		/>
 		<pre>{{todos}}</pre>
 		<pre>{{filtredTodos}}</pre>
@@ -29,6 +28,9 @@ export default {
 	},
 	data() {
 		return {
+			// filtredTodos
+			// counterTodos
+			// buttonClearTodos
 		}
 	},
 	mounted() {//getters для тестирования и примера!
@@ -42,7 +44,6 @@ export default {
 		...mapState({//vuex
 			todos: state => state.todos.todos,
 			filter: state => state.todos.filter,
-			select: state => state.todos.select,
 		}),
 		// ...mapGetters(['todoById']),//getters для тестирования и примера!
 		...mapGetters(['filtredTodos', 'counterTodos', 'buttonClearTodos']),
@@ -59,9 +60,9 @@ export default {
 		// 		this.filtredTodos.filter(item => item.checked = false)
 		// 	}
 		// },
-		clearTodos() {
-			this.todos = this.todos.filter(item => item.checked == false)
-		}
+		// clearTodos() {
+		// 	this.todos = this.todos.filter(item => item.checked == false)
+		// }
 	},
 }
 </script>

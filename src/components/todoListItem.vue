@@ -40,11 +40,14 @@ export default {
 		todo: Object
 	},
 	methods: {
-		...mapMutations(['removeTodo', 'checkTodo']),
+		...mapMutations(['removeTodo', 'checkTodo',
+		'checkTodoToSelect_V']),
 
 		removeExistedTodo() {
 			// this.$emit('removeTodo', this.todo.id)
 			this.removeTodo(this.todo.id)//vuex
+
+			this.checkTodoToSelect_V()//vuex
 		},
 		checkTodoAsComplited(e) {
 			// this.$emit('checkTodo', this.todo.checked = e.target.checked) //измение по ссылке
@@ -54,6 +57,7 @@ export default {
 			}
 			// this.$emit('checkTodo', todoItem)
 			this.checkTodo(todoItem)//vuex
+			this.checkTodoToSelect_V()//vuex
 		}
 	}
 

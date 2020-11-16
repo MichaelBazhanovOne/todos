@@ -34,6 +34,9 @@ const todos = {
 		buttonClearTodos: (state) => {
 			return state.todos.some(item => item.checked)
 		},
+		select: (state) => {
+			return state.select
+		},
 	},
 	mutations: {
 		addTodo(state, todo) {
@@ -53,16 +56,25 @@ const todos = {
 		// testMutations(state, test) {
 		// 	console.log('testMutations', test)
 		// }
-		arrowTodoSelect_V(state, select) {
-			state.select = select
+		arrowTodoSelectToggle_V(state) {
+			state.select = !state.select
 		},
-		arrowTodoFilter_V(state, select) {
-			if (select) {
+		arrowTodoFilter_V(state) {
+			if (state.select) {
 				state.todos.filter(item => item.checked = true)
 			} else {
 				state.todos.filter(item => item.checked = false)
 			}
 		},
+		checkTodoToSelect_V(state) {
+			//если хотя бы один item=false то select невиден
+			state.select = state.todos.every(item => item.checked);
+		},
+		removeTodoChecked_V(state) {
+			state.todos = state.todos.filter( item => {
+				return !item.checked
+			})
+		}
 	},
 }
 

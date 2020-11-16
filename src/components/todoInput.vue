@@ -2,22 +2,26 @@
 	<div
 		:class="['todo-input', {'valid-error': validation.hasError('todo.name')}]">
 		<div class="error">{{ validation.firstError('todo.name') }}</div>
+
 		<div
-		v-if="todos.length"
-		@click="arrowTodo"
-		:class="['arrow', {select:select}]">
+			v-if="todos.length"
+			@click="arrowTodo"
+			:class="['arrow', {select:select}]"
+		>
 			<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>
 		</div>
+
 		<input
-		v-model="todo.name"
-		@keydown.enter="addNewTodo"
-		class="input" type="text" placeholder="Todo Name" autofocus>
+			v-model="todo.name"
+			@keydown.enter="addNewTodo"
+			class="input" type="text" placeholder="Todo Name" autofocus
+		>
 	</div>
 </template>
 
 <script>
 import { Validator } from 'simple-vue-validator'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 let uniqId = 1;
 export default {
@@ -37,12 +41,14 @@ export default {
 				name: '',
 				checked: false,
 			},
-			select: false
 		}
 	},
+	computed: {
+		...mapGetters(['select']),
+	},
 	methods: {
-		...mapMutations(['addTodo', 'arrowTodoSelect_V',
-		'arrowTodoFilter_V']),
+		...mapMutations(['addTodo', 'arrowTodoFilter_V',
+		'arrowTodoSelectToggle_V']),
 		addNewTodo(e) {
 			this.$validate().then(succes => {
 				//неудачная валидация
@@ -53,13 +59,17 @@ export default {
 				this.addTodo({...this.todo});//vuex
 				this.todo.name =''
 				this.validation.reset()
-			})
+			});
+
+			if(this.select) { //add
+				this.arrowTodoSelectToggle_V();//vuex
+			}
 		},
 		arrowTodo() {
-			this.select == false ? this.select = true : this.select = false
+			this.arrowTodoSelectToggle_V();//vuex
+			// this.select == false ? this.select = true : this.select = false
 			// this.$emit('arrowTodo', this.select)
-			this.arrowTodoSelect_V(this.select);//vuex
-			this.arrowTodoFilter_V(this.select);//vuex
+			this.arrowTodoFilter_V();//vuex
 		}
 	}
 }
