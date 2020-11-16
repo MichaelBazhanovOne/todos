@@ -41,7 +41,8 @@ export default {
 		}
 	},
 	methods: {
-		...mapMutations(['addTodo', 'arrowTodoSelect_V']),
+		...mapMutations(['addTodo', 'arrowTodoSelect_V',
+		'arrowTodoFilter_V']),
 		addNewTodo(e) {
 			this.$validate().then(succes => {
 				//неудачная валидация
@@ -58,6 +59,7 @@ export default {
 			this.select == false ? this.select = true : this.select = false
 			// this.$emit('arrowTodo', this.select)
 			this.arrowTodoSelect_V(this.select);//vuex
+			this.arrowTodoFilter_V(this.select);//vuex
 		}
 	}
 }

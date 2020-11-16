@@ -2,8 +2,8 @@
 	<div class="todo">
 		<todo-input
 		:todos='todos'
-		@arrowTodo='arrowTodo'
 		/>
+		<!-- @arrowTodo='arrowTodo' -->
 
 		<todo-list
 		v-if="todos.length > 0"
@@ -52,13 +52,13 @@ export default {
 	methods: {
 		// ...mapActions(['fetchItem']),
 
-		arrowTodo(select) {
-			if (select) {
-				this.filtredTodos.filter(item => item.checked = true)
-			} else {
-				this.filtredTodos.filter(item => item.checked = false)
-			}
-		},
+		// arrowTodo(select) {
+		// 	if (select) {
+		// 		this.filtredTodos.filter(item => item.checked = true)
+		// 	} else {
+		// 		this.filtredTodos.filter(item => item.checked = false)
+		// 	}
+		// },
 		clearTodos() {
 			this.todos = this.todos.filter(item => item.checked == false)
 		}

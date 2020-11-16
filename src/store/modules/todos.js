@@ -55,7 +55,14 @@ const todos = {
 		// }
 		arrowTodoSelect_V(state, select) {
 			state.select = select
-		}
+		},
+		arrowTodoFilter_V(state, select) {
+			if (select) {
+				state.todos.filter(item => item.checked = true)
+			} else {
+				state.todos.filter(item => item.checked = false)
+			}
+		},
 	},
 }
 
