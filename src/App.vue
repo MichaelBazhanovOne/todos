@@ -40,8 +40,9 @@ body {
 }
 
 .container {
-    width: 600px;
+    max-width: 600px;
     margin: 0 auto;
+    padding: 0 16px;
     }
 
 ul {
@@ -61,8 +62,9 @@ ul {
   font-size: 70px;
   opacity: 0.5;
   color: #607d8b;
-  padding: 0;
-  margin: 40px 0;
+  margin: 0;
+  padding: 40px 0;
+  box-sizing: border-box;
 }
 .todo-subtitle-1 {
   text-align: center;

@@ -82,7 +82,7 @@ export default {
 .footer {
     color: #777;
 	background-color: #fff;
-    padding: 10px 15px;
+    padding: 10px 20px;
     text-align: center;
     position: relative;
     font-size: 14px;
@@ -101,12 +101,54 @@ export default {
 .footer-content{
     display: flex;
     align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	position: relative;
+
+	@media (min-width: 480px) {
+
+		.counter {
+
+		}
+		.filter {
+			order: 3;
+			padding-top: 0px;
+			width: 40%;
+		}
+		.clear {
+			order: 5;
+		}
+	}
+
+}
+.counter {
+	order: 1;
+	// flex-grow: 1;
+	// width: 33.333333%;
 }
 .filter {
-    flex: 1;
+	order: 3;
+	// flex-grow: 1;
+
+	width: 100%;
+
+	padding-top: 10px;
+
+
+	&>div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		button {
+			flex-grow: 1;
+		}
+	}
 }
 .clear {
+	order: 2;
+	// width: 33.333333%;
+	// flex-grow: 1;
+
 	visibility: hidden;
 
 	&.show {
@@ -130,6 +172,4 @@ export default {
 		}
 	}
 }
-
-
 </style>

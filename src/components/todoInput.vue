@@ -83,7 +83,7 @@ export default {
 }
 .input {
 	font-size: 24px;
-	padding: 16px 16px 16px 60px;
+	padding: 16px 16px 16px 57px;
 	border: 1px solid transparent;
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.03);
 	line-height: 1.4em;
