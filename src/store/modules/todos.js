@@ -13,6 +13,21 @@ const todos = {
 		// testActions(state) {
 		// 	console.log('testActions - из actions вызвать actions')
 		// }
+		fetchState(state) {
+			console.log('fetchState')
+			let {todos, filter, select} = state.state;
+			let s1 = JSON.stringify({todos, filter, select})
+			localStorage.setItem('state', s1);
+			// ----------------------------------
+			//из упакованного state получем данные и читаем с записью во vuex
+			let s2 = localStorage.getItem('state');
+			console.log(s2)
+			let data = JSON.parse(s2);
+
+			for (let item in data) {
+				console.log(item)
+			}
+		}
 	},
 	getters: {
 		// todoById: state => id => {

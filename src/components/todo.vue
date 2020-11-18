@@ -33,6 +33,9 @@ export default {
 			// buttonClearTodos
 		}
 	},
+	created() {
+		this.fetchState();
+	},
 	mounted() {//getters для тестирования и примера!
 		// setTimeout(() => {
 		// 	console.log(this.todoById(3))
@@ -47,11 +50,10 @@ export default {
 		}),
 		// ...mapGetters(['todoById']),//getters для тестирования и примера!
 		...mapGetters(['filtredTodos', 'counterTodos', 'buttonClearTodos']),
-
-
 	},
 	methods: {
 		// ...mapActions(['fetchItem']),
+		...mapActions(['fetchState'])
 	},
 }
 </script>
