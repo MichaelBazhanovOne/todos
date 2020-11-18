@@ -13,20 +13,49 @@ const todos = {
 		// testActions(state) {
 		// 	console.log('testActions - из actions вызвать actions')
 		// }
-		fetchState(state) {
-			console.log('fetchState')
-			let {todos, filter, select} = state.state;
-			let s1 = JSON.stringify({todos, filter, select})
-			localStorage.setItem('state', s1);
+		fetchState(state) {//получение данные из localStorage (browser API) в vuex (относительно vuex)
+			//вкладываем кастомные данные в хранилище
 			// ----------------------------------
+			// let castomData = JSON.stringify({
+			// 	"todos":[
+			// 		{
+			// 			"id": 1,
+			// 			"name": "1",
+			// 			"checked": false
+			// 		},
+			// 		{
+			// 			"id": 2,
+			// 			"name": "2",
+			// 			"checked": true
+			// 		},
+			// 		{
+			// 			"id": 3,
+			// 			"name": "3",
+			// 			"checked": false
+			// 		}
+			// 	],
+			// 	"filter":"all",
+			// 	"select":false,
+			// })
+			// localStorage.setItem('state', castomData);
+
 			//из упакованного state получем данные и читаем с записью во vuex
 			let s2 = localStorage.getItem('state');
-			console.log(s2)
-			let data = JSON.parse(s2);
+			let data = JSON.parse(s2);//распарсим данные
+			// console.log(data)
 
-			for (let item in data) {
-				console.log(item)
-			}
+			let todos = [...data.todos];
+			let filter = data.filter;
+			let select = data.select;
+
+			state.commit('getAll_localStorage', { todos, filter, select })
+		},
+		setState(state) {//получение данные из vuex в localStorage (browser API) (относительно vuex)
+			let todos = [...state.todos];
+			let filter = state.filter;
+			let select = state.select;
+			let castomData = JSON.stringify({ todos, filter, select })
+			localStorage.setItem('state', castomData);
 		}
 	},
 	getters: {
@@ -54,6 +83,16 @@ const todos = {
 		},
 	},
 	mutations: {
+		getAll_localStorage(state, data) {
+			state.todos = [...data.todos];
+			state.filter = data.filter;
+			state.select = data.select;
+		},
+		// setAll_localStorage(state, data) {
+		// 	state.todos = [...data.todos];
+		// 	state.filter = data.filter;
+		// 	state.select = data.select;
+		// },
 		addTodo(state, todo) {
 			state.todos.push(todo)
 		},
