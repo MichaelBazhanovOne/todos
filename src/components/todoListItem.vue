@@ -45,19 +45,20 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
 	props: {
 		todo: Object
 	},
 	methods: {
-		...mapMutations(['removeTodo', 'checkTodo',
-		'checkTodoToSelect_V']),
+		...mapMutations(['checkTodo', 'checkTodoToSelect_V']),
+		...mapActions(['changeRemoveTodo']),
 
 		removeExistedTodo() {
 			// this.$emit('removeTodo', this.todo.id)
-			this.removeTodo(this.todo.id)//vuex
+			// this.removeTodo(this.todo.id)//vuex
+			this.changeRemoveTodo(this.todo.id)//vuex (переписан на Action)
 
 			this.checkTodoToSelect_V()//vuex
 		},

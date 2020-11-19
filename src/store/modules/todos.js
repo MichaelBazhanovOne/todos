@@ -13,7 +13,7 @@ const todos = {
 		// testActions(state) {
 		// 	console.log('testActions - из actions вызвать actions')
 		// }
-		fetchState(state) {//получение данные из localStorage (browser API) в vuex (относительно vuex)
+		getState(state) {//получение данные из localStorage (browser API) в vuex (относительно vuex)
 			//вкладываем кастомные данные в хранилище
 			// ----------------------------------
 			// let castomData = JSON.stringify({
@@ -51,12 +51,27 @@ const todos = {
 			state.commit('getAll_localStorage', { todos, filter, select })
 		},
 		setState(state) {//получение данные из vuex в localStorage (browser API) (относительно vuex)
-			let todos = [...state.todos];
-			let filter = state.filter;
-			let select = state.select;
+			let todos = [...state.state.todos];
+			let filter = state.state.filter;
+			let select = state.state.select;
 			let castomData = JSON.stringify({ todos, filter, select })
 			localStorage.setItem('state', castomData);
-		}
+
+			//всего в 4 местах использую///////////////////
+			//-1- на добавление todo
+			//-1- на удаление todo
+			//-1- на клик по select
+			//-1- на клик по filter
+			///////////////////////////////////////////////
+		},
+		changeAddTodo(state, todo) {
+			state.commit('addTodo', todo);//положили данные в state
+			state.dispatch('setState');//положили данные в localStorage
+		},
+		changeRemoveTodo(state, todoId) {
+			state.commit('removeTodo', todoId);//положили данные в state
+			state.dispatch('setState');//положили данные в localStorage
+		},
 	},
 	getters: {
 		// todoById: state => id => {
@@ -88,15 +103,11 @@ const todos = {
 			state.filter = data.filter;
 			state.select = data.select;
 		},
-		// setAll_localStorage(state, data) {
-		// 	state.todos = [...data.todos];
-		// 	state.filter = data.filter;
-		// 	state.select = data.select;
-		// },
-		addTodo(state, todo) {
+		addTodo(state, todo) { console.log(state)
 			state.todos.push(todo)
 		},
 		removeTodo(state, todoId) {
+			console.log(state)
 			state.todos = state.todos.filter(item => {
 				return item.id != todoId
 			})

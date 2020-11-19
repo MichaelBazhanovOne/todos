@@ -21,7 +21,7 @@
 
 <script>
 import { Validator } from 'simple-vue-validator'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 let uniqId = 1;
 export default {
@@ -48,6 +48,8 @@ export default {
 	},
 	methods: {
 		...mapMutations(['addTodo', 'arrowTodoFilter_V', 'arrowTodoSelectToggle_V']),
+		...mapActions(['changeAddTodo']),
+
 		addNewTodo(e) {
 			this.$validate().then(succes => {
 				//неудачная валидация
@@ -55,7 +57,8 @@ export default {
 
 				//удачная валидация
 				this.todo.id = uniqId++;
-				this.addTodo({...this.todo});//vuex
+				// this.addTodo({...this.todo});//vuex
+				this.changeAddTodo({...this.todo});//vuex (переписан на Action)
 				this.todo.name =''
 				this.validation.reset()
 			});
@@ -63,6 +66,8 @@ export default {
 			if(this.select) { //add
 				this.arrowTodoSelectToggle_V();//vuex
 			}
+
+
 		},
 		arrowTodo() {
 			this.arrowTodoSelectToggle_V();//vuex
