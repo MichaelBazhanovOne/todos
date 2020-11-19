@@ -23,7 +23,6 @@
 import { Validator } from 'simple-vue-validator'
 import { mapMutations, mapGetters, mapActions } from 'vuex'
 
-let uniqId = 1;
 export default {
 	mixins: [require('simple-vue-validator').mixin],
 	validators: {
@@ -44,11 +43,11 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['select']),
+		...mapGetters(['select', 'plus']),
 	},
 	methods: {
-		...mapMutations(['addTodo', 'arrowTodoFilter_V', 'arrowTodoSelectToggle_V']),
-		...mapActions(['changeAddTodo']),
+		...mapMutations(['addTodo', 'arrowTodoFilter_V', 'arrowTodoSelectToggle_V', 'ID']),
+		...mapActions(['changeAddTodo','changeSelect']),
 
 		addNewTodo(e) {
 			this.$validate().then(succes => {
@@ -56,7 +55,9 @@ export default {
 				if(!succes) return
 
 				//удачная валидация
-				this.todo.id = uniqId++;
+				this.todo.id = this.plus;//vuex (увеличиваем id счетчик на 1)
+				this.ID(this.todo.id); //записываем текущий ID во vuex для сравнения
+
 				// this.addTodo({...this.todo});//vuex
 				this.changeAddTodo({...this.todo});//vuex (переписан на Action)
 				this.todo.name =''
@@ -67,13 +68,14 @@ export default {
 				this.arrowTodoSelectToggle_V();//vuex
 			}
 
-
 		},
 		arrowTodo() {
 			this.arrowTodoSelectToggle_V();//vuex
 			// this.select == false ? this.select = true : this.select = false
 			// this.$emit('arrowTodo', this.select)
 			this.arrowTodoFilter_V();//vuex
+
+			this.changeSelect()//vuex-action
 		}
 	}
 }

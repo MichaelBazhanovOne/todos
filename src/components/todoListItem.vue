@@ -53,7 +53,7 @@ export default {
 	},
 	methods: {
 		...mapMutations(['checkTodo', 'checkTodoToSelect_V']),
-		...mapActions(['changeRemoveTodo']),
+		...mapActions(['changeRemoveTodo','changeChecked']),
 
 		removeExistedTodo() {
 			// this.$emit('removeTodo', this.todo.id)
@@ -71,6 +71,8 @@ export default {
 			// this.$emit('checkTodo', todoItem)
 			this.checkTodo(todoItem)//vuex
 			this.checkTodoToSelect_V()//vuex
+
+			this.changeChecked()//vuex-action
 		}
 	}
 

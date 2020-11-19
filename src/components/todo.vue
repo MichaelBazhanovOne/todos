@@ -55,21 +55,6 @@ export default {
 		// ...mapActions(['fetchItem']),
 		...mapActions(['getState'])
 	},
-	// watch: {//для сохранения в localStorage
-	// 	todos(value) {
-	// 		console.log(value)
-	// 		// this.setState();
-
-	// 	},
-	// 	filter(value) {
-	// 		console.log(value)
-	// 		// this.setState();
-	// 	},
-	// 	select(value) {
-	// 		console.log(value)
-	// 		// this.setState();
-	// 	}
-	// }
 }
 </script>
 

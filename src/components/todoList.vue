@@ -39,7 +39,7 @@
 import todoListFilter from "./todoListFilter";
 import todoListItem from "./todoListItem";
 
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
 	props: {
@@ -53,10 +53,13 @@ export default {
 	},
 	methods: {
 		...mapMutations(['removeTodoChecked_V']),
+		...mapActions(['changeClear']),
 
 		clearTodos() {
 			// this.$emit('clearTodos')
 			this.removeTodoChecked_V() //vuex
+
+			this.changeClear()//vuex-action
 		}
 	}
 

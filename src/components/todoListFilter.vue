@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
 	data() {
@@ -21,11 +21,14 @@ export default {
 	},
 	methods: {
 		...mapMutations(['filterTodos']),
+		...mapActions(['changeFilter']),
 
 		filterCurentTodos(filter) {
 			this.currentFilter = filter
 			// this.$emit('filterTodos', filter)
 			this.filterTodos(filter) //vuex
+
+			this.changeFilter();//vuex-action
 		}
 	}
 }
