@@ -38,6 +38,10 @@ body {
     min-height: 100vh;
     color: #607d8b;
 }
+html {
+
+    min-width: 320px;
+}
 
 .container {
     max-width: 600px;

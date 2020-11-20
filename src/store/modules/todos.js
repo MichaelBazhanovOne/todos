@@ -118,6 +118,9 @@ const todos = {
 		plus: (state) => {
 			return state.maxID + 1
 		},
+		currentFilter: (state) => {
+			return state.filter
+		},
 	},
 	mutations: {
 		getAll_localStorage(state, data) {

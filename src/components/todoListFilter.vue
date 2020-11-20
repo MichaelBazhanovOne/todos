@@ -10,24 +10,27 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
 	data() {
 		return {
 			filters: ['all','active','completed'],
-			currentFilter: 'all',
+			// currentFilter: 'all',
 		}
+	},
+	computed: {
+		...mapGetters(['currentFilter']),
 	},
 	methods: {
 		...mapMutations(['filterTodos']),
 		...mapActions(['changeFilter']),
 
 		filterCurentTodos(filter) {
-			this.currentFilter = filter
+			// this.currentFilter = filter
 			// this.$emit('filterTodos', filter)
-			this.filterTodos(filter) //vuex
 
+			this.filterTodos(filter) //vuex-mutation
 			this.changeFilter();//vuex-action
 		}
 	}
