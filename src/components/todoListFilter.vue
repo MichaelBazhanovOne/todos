@@ -30,6 +30,7 @@ export default {
 			// this.currentFilter = filter
 			// this.$emit('filterTodos', filter)
 
+
 			this.filterTodos(filter) //vuex-mutation
 			this.changeFilter();//vuex-action
 		}
