@@ -20,5 +20,6 @@ const routes = [
 	}
 ];
 
-export default new VueRouter({routes, mode: 'history'})
+// export default new VueRouter({routes, mode: 'history'}) //на GH-pages такой мод не работает
+export default new VueRouter({routes})
 
