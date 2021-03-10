@@ -1,16 +1,32 @@
 # todo-app
 
-> A Vue.js project
+> Pet Project => Todos List ( Vue + Vuex + Router + Validator )
 
-## Build Setup
+##  Чтобы развернуть проект необходимо:
+```sh
+$ git clone git@github.com:loftschool/todos.git
+$ cd todos
+$ yarn
+```
 
-``` bash
-# install dependencies
-npm install
+## Скрипты package.json:
 
-# serve with hot reload at localhost:8080
-npm run dev
+| Скрипт | Назначение |
+| ------ | ------ |
+| dev | Запустит webpack-dev-server с _горячей_ заменой модулей |
+| build | Соберет проект для **production** (проект готов к загрузке на сервер) |
 
-# build for production with minification
-npm run build
+#### Чтобы запустить скрипт:
+```sh
+$ npm run "имя_скрипта"
+```
+
+##### Либо:
+```sh
+$ yarn "имя_скрипта"
+```
+
+#### Чтобы запустить shell скрипт для deploy:
+```sh
+$ sh deploy.sh
 ```

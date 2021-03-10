@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .content {
 	position: relative;
 	z-index: 1;

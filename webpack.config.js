@@ -1,108 +1,110 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = {
-  entry: './src/main.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ],
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader?indentedSyntax'
-        ],
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': [
-              'vue-style-loader',
-              'css-loader',
-              'sass-loader'
-            ],
-            'sass': [
-              'vue-style-loader',
-              'css-loader',
-              'sass-loader?indentedSyntax'
-            ]
-          }
-          // other vue-loader options go here
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+module.exports = (env, argv) => {
+  const isProductionBuild = argv.mode === "production";
+  const publicPath = "/todos/";
+
+  const pcss = {
+    test: /\.(p|post|)css$/,
+    use: [
+      isProductionBuild ? MiniCssExtractPlugin.loader : "vue-style-loader",
+      "css-loader",
+      "postcss-loader",
+    ],
+  };
+
+  const vue = {
+    test: /\.vue$/,
+    loader: "vue-loader",
+  };
+
+  const js = {
+    test: /\.js$/,
+    loader: "babel-loader",
+    exclude: /node_modules/,
+  };
+
+  const files = {
+    test: /\.(png|jpe?g|gif|woff2?)$/i,
+    loader: "file-loader",
+    options: {
+      name: "[hash].[ext]",
     },
-    extensions: ['*', '.js', '.vue', '.json']
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true
-  },
-  performance: {
-    hints: false
-  },
-  devtool: '#eval-source-map'
-}
+  };
 
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
-}
+  const config = {
+    entry: {
+      main: "./src/main.js",
+    },
+    output: {
+      path: path.resolve(__dirname, "./dist"),
+      filename: "[name].[hash].build.js",
+      publicPath: isProductionBuild ? publicPath : "",
+      chunkFilename: "[chunkhash].js",
+    },
+    module: {
+      rules: [pcss, vue, js, files],
+    },
+    resolve: {
+      alias: {
+        vue$: "vue/dist/vue.esm.js",
+        images: path.resolve(__dirname, "./src/assets"),
+        components: path.resolve(__dirname, "./src/components"),
+      },
+      extensions: ["*", ".js", ".vue", ".json"],
+    },
+    devServer: {
+      historyApiFallback: true,
+      noInfo: false,
+      overlay: true,
+    },
+    performance: {
+      hints: false,
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: 'index.html'
+      }),
+      new VueLoaderPlugin(),
+    ],
+    devtool: "#eval-source-map",
+  };
+
+  if (isProductionBuild) {
+    config.devtool = "none";
+    config.plugins = (config.plugins || []).concat([
+      new CleanWebpackPlugin(),
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: '"production"',
+        },
+      }),
+      new MiniCssExtractPlugin({
+        filename: "[name].[contenthash].css",
+        chunkFilename: "[contenthash].css",
+      }),
+    ]);
+
+    config.optimization = {};
+
+    config.optimization.minimizer = [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false,
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ];
+  }
+
+  return config;
+
+};
+

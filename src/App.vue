@@ -1,5 +1,4 @@
 <template>
-  <!-- http://todomvc.com/examples/vue/#/all -->
   <div class="container">
     <h1 class="root-todo">TODOS</h1>
 
@@ -14,52 +13,50 @@
 import todo from "./components/todo";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    todo
+    todo,
   },
-  data () {
-    return {
-    }
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
 
-<style lang="scss">
+<style lang="postcss">
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.42;
-    -webkit-font-smoothing: antialiased;
-    font-weight: 300;
-    background: linear-gradient(#f5f5f5, #2d7ca247);
-    min-height: 100vh;
-    color: #607d8b;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.42;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+  background: linear-gradient(#f5f5f5, #2d7ca247);
+  min-height: 100vh;
+  color: #607d8b;
 }
 html {
-
-    min-width: 320px;
+  min-width: 320px;
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 0 16px;
-    }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
 
 ul {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    li {
-        list-style: none;
-    }
+  li {
+    list-style: none;
+  }
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 .root-todo {
   text-align: center;

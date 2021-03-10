@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .todo-input {
 	position: relative;
 	color: #607d8b;
